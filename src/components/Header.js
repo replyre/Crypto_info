@@ -27,6 +27,11 @@ const styles = {
     marginRight: 5,
     border: "2px solid orange",
     color: "orange",
+
+    "&:hover": {
+      border: "2px solid orange",
+      outline: "none",
+    },
   },
 };
 const darkTheme = createTheme({

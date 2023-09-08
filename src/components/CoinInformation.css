@@ -1,0 +1,26 @@
+.containerChart {
+  width: 100vw;
+  display: "flex";
+  flex-direction: column;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  border-left: 2px solid darkgrey;
+}
+
+.chart {
+  height: 80vh;
+  width: "100%";
+  /* background-color: aqua; */
+}
+
+@media (max-width: 500px) {
+  .containerChart {
+    width: "100vw";
+    margin-top: 0px;
+    padding: 20px;
+    padding-top: 0;
+  }
+}

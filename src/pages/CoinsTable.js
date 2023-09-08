@@ -42,10 +42,15 @@ const CoinsTable = () => {
 
   const fetchCoins = async () => {
     setLoading(true);
-    const { data } = await axios.get(CoinList(currency));
+    try {
+      const { data } = await axios.get(CoinList(currency));
 
-    setCoins(data);
-    setLoading(false);
+      setCoins(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -74,7 +79,7 @@ const CoinsTable = () => {
         />
         <TableContainer>
           {loading ? (
-            <LinearProgress sx={{ backgroundColor: "orange" }} />
+            <LinearProgress />
           ) : (
             <Table>
               <TableHead sx={{ backgroundColor: "orange" }}>

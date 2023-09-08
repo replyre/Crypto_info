@@ -15,12 +15,11 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: "20px",
     margin: "auto",
   },
   heading: {
     display: "flex",
-    marginBottom: "20px",
     justifyContent: "center",
     fontFamily: "Montserrat",
     fontWeight: "bold",
@@ -38,9 +37,8 @@ const Coinpage = () => {
     setCoin(data);
   };
   {
-    obj = { __html: coin?.description.en.split(". ")[0] };
+    obj = { __html: coin?.description.en.split(". ")[0] + "." };
   }
-  console.log(coin);
   useEffect(() => {
     fetchCoin();
   }, []);
@@ -50,7 +48,7 @@ const Coinpage = () => {
         <div className="image" style={styles.image}>
           <img src={coin?.image.large} alt={coin?.name} height="200" />
         </div>
-        <Typography variant="h3" sx={styles.heading}>
+        <Typography className="heading" variant="h3" sx={styles.heading}>
           {coin?.name}
         </Typography>
         <Typography
@@ -72,10 +70,9 @@ const Coinpage = () => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h5" sx={styles.heading}>
+            <Typography className="heading" variant="h5" sx={styles.heading}>
               Rank
             </Typography>{" "}
-            &nbsp;&nbsp;
             <Typography
               variant="h5"
               style={{
@@ -91,10 +88,9 @@ const Coinpage = () => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h6" sx={styles.heading}>
+            <Typography className="heading" variant="h6" sx={styles.heading}>
               Current Price
             </Typography>{" "}
-            &nbsp;&nbsp;
             <Typography
               variant="h6"
               style={{
@@ -115,10 +111,9 @@ const Coinpage = () => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h6" sx={styles.heading}>
+            <Typography className="heading" variant="h6" sx={styles.heading}>
               Market Cap
             </Typography>{" "}
-            &nbsp;&nbsp;
             <Typography
               variant="h6"
               style={{

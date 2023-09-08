@@ -46,7 +46,6 @@ const darkTheme = createTheme({
 const Header = () => {
   const navigate = useNavigate();
   const { currency, setCurrency } = CryptoState();
-  console.log(currency);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar color="transparent" position="static">

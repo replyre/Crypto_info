@@ -4,11 +4,16 @@
 
 .sidebar {
   width: 30%;
-
   margin-top: 25px;
+  /* background-color: antiquewhite; */
 }
 
-.marketData {
+.heading {
+  margin-bottom: "20px";
+  padding-right: 10px;
+}
+.marketData span {
+  margin-bottom: 20px;
 }
 
 @media (max-width: 800px) {
@@ -26,5 +31,17 @@
     padding: 10px;
     width: 100%;
     flex-direction: "column";
+  }
+
+  .marketData span {
+    flex-direction: column;
+    margin-top: 0px;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .heading {
+    margin-bottom: 0px;
+    padding-right: 0px;
   }
 }

@@ -16,6 +16,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { chartDays } from "../config/data";
+import SelectButton from "./SelectButton";
+import ErrorMessage from "./ErrorMessage";
 
 ChartJS.register(
   CategoryScale,
@@ -51,52 +54,97 @@ const CoinInformation = ({ coin }) => {
   const [historicalData, setHistoricalData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
+  const [error, setError] = useState(false);
+  const [update, setUpdate] = useState(false);
   const fetchHistoricalData = async () => {
-    const { data } = await axios.get(HistoricalChart(coin?.id, days, currency));
-    setHistoricalData(data?.prices);
+    try {
+      const { data } = await axios.get(
+        HistoricalChart(coin?.id, days, currency)
+      );
+      {
+        data && setHistoricalData(data.prices);
+      }
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
   };
 
-  console.log(historicalData);
   useEffect(() => {
+    setError(false);
     fetchHistoricalData();
-  }, [currency, days]);
+  }, [currency, days, update]);
 
   return (
-    <div className="containerChart">
-      {!historicalData ? (
-        <CircularProgress sx={{ color: "orange" }} size={250} thickness={1} />
-      ) : (
-        <>
-          <Line
-            options={{
-              elements: {
-                point: {
-                  radius: 0,
-                },
-              },
-            }}
-            className="chart"
-            data={{
-              labels: historicalData?.map((coin) => {
-                let date = new Date(coin[0]);
-                let time =
-                  date.getHours() > 12
-                    ? `${date.getHours() - 12}:${date.getMinutes()} PM`
-                    : `${date.getHours()}:${date.getMinutes()} AM`;
-                return days === 1 ? time : String(date.toLocalDateString());
-              }),
-              datasets: [
-                {
-                  borderColor: "#eeBC1D",
-                  label: `Price (Past ${days} Days) in ${currency}`,
-                  data: historicalData?.map((coi) => coi[1].toFixed()),
-                },
-              ],
-            }}
-          />
-        </>
+    <>
+      {error && (
+        <ErrorMessage
+          OnClick={() => {
+            setUpdate(!update);
+          }}
+        ></ErrorMessage>
       )}
-    </div>
+      {!error && (
+        <div className="containerChart">
+          {!historicalData ? (
+            <CircularProgress
+              sx={{ color: "orange" }}
+              size={250}
+              thickness={1}
+            />
+          ) : (
+            <>
+              <Line
+                options={{
+                  elements: {
+                    point: {
+                      radius: 0,
+                    },
+                  },
+                }}
+                className="chart"
+                data={{
+                  labels: historicalData?.map((coin) => {
+                    let date = new Date(coin[0]);
+                    let time =
+                      date.getHours() > 12
+                        ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                        : `${date.getHours()}:${date.getMinutes()} AM`;
+                    return days === 1
+                      ? time
+                      : String(date.toLocaleDateString());
+                  }),
+                  datasets: [
+                    {
+                      borderColor: "#eeBC1D",
+                      label: `Price (Past ${days} Days) in ${currency}`,
+                      data: historicalData?.map((coin) => coin[1].toFixed()),
+                    },
+                  ],
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: 20,
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
+                {chartDays.map((day) => (
+                  <SelectButton
+                    selected={day.value === days}
+                    key={day.value}
+                    onClick={() => setDays(day.value)}
+                    item={day.label}
+                  ></SelectButton>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 export default CoinInformation;

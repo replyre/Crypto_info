@@ -1,0 +1,24 @@
+.Button {
+  display: flex;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.Button2 {
+  display: flex;
+  padding: 5px 2px;
+  text-align: center;
+  font-size: 12px;
+}
+@media (max-width: 500px) {
+  .Button {
+    display: none;
+  }
+}
+
+@media (min-width: 500px) {
+  .Button2 {
+    display: none;
+  }
+}

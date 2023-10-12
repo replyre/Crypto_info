@@ -67,7 +67,10 @@ const CoinsTable = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <Container sx={{ textAlign: "center" }}>
-        <Typography variant="h4" sx={{ margin: 8, fontFamily: "monospace" }}>
+        <Typography
+          variant="h4"
+          sx={{ margin: "8px auto ", fontFamily: "monospace" }}
+        >
           Cryptocurrency Prices as per Market Cap
         </Typography>
 
@@ -174,9 +177,10 @@ const CoinsTable = () => {
         </TableContainer>
         <Pagination
           sx={{
-            padding: 2,
+            paddingY: 2,
             width: "100%",
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "center",
             "& .MuiPaginationItem-root": {
               color: "orange",

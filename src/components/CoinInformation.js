@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CryptoState } from "../pages/CrptoCoins";
 import axios from "axios";
 import { HistoricalChart } from "../config/api";
-import { ThemeProvider } from "react-bootstrap";
 import { CircularProgress, createTheme } from "@mui/material";
 import "./CoinInformation.css";
 import {

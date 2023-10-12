@@ -3,12 +3,6 @@ import "./App.css";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Coinpage from "./pages/Coinpage";
-import {
-  Container,
-  createTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core";
 
 function App() {
   const styles = {
@@ -19,7 +13,7 @@ function App() {
     },
   };
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="">
       <div style={styles.App}>
         <Header />
         <Routes>
